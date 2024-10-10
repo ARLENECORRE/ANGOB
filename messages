@@ -1,0 +1,328 @@
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialSphere - Messages</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #f0f2f5;
+        color: #1c1e21;
+        height: 100%;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        height: calc(100% - 60px);
+    }
+    header {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1877f2;
+        text-decoration: none;
+    }
+    .nav-links a {
+        color: #65676b;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+        color: #1877f2;
+    }
+    .messages-container {
+        display: flex;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+    .conversations-list {
+        width: 300px;
+        border-right: 1px solid #e4e6eb;
+        overflow-y: auto;
+    }
+    .conversation-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .conversation-item:hover {
+        background-color: #f0f2f5;
+    }
+    .conversation-item.active {
+        background-color: #e7f3ff;
+    }
+    .conversation-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    .conversation-info {
+        flex-grow: 1;
+    }
+    .conversation-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .conversation-preview {
+        color: #65676b;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .chat-area {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .chat-header {
+        padding: 15px;
+        border-bottom: 1px solid #e4e6eb;
+        display: flex;
+        align-items: center;
+    }
+    .chat-header-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    .chat-header-name {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .chat-messages {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    .message {
+        max-width: 70%;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 18px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    .message.sent {
+        background-color: #0084ff;
+        color: white;
+        align-self: flex-end;
+        margin-left: auto;
+    }
+    .message.received {
+        background-color: #e4e6eb;
+        color: #050505;
+        align-self: flex-start;
+    }
+    .message-input {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid #e4e6eb;
+    }
+    .message-input input {
+        flex-grow: 1;
+        border: none;
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #f0f2f5;
+        font-size: 14px;
+    }
+    .message-input input:focus {
+        outline: none;
+    }
+    .send-button {
+        background-color: #0084ff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+    }
+    .send-button:hover {
+        background-color: #0077e6;
+    }
+    .send-button svg {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/home" class="logo">SocialSphere</a>
+            <div class="nav-links">
+                <a href="/home.html
+                <a href="/home/profile.html
+                <a href="/home/messages.html
+                <a href="/home/notifications.html
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="messages-container">
+            <div class="conversations-list" id="conversations-list">
+                <!-- Conversations will be dynamically added here -->
+            </div>
+            <div class="chat-area">
+                <div class="chat-header">
+                    <img src="" alt="richelyn.jpg" class="chat-header-avatar" id="chat-header-avatar">
+                    <span class="richelyn" id="chat-header-name"></span>
+                </div>
+                <div class="chat-messages" id="fagod na fo ako">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+                <div class="message-input">
+                    <input type="text" placeholder="Type a message..." id="message-input">
+                    <button class="send-button" id="send-button">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const conversations = [
+                { id: 1, name: "Sarah Lee", avatar: "https://api.dicebear.com/6.x/personas/svg?seed=Sarah", lastMessage: "Hey, how's it going?", time: "10:30 AM" },
+                { id: 2, name: "Mike Brown", avatar: "https://api.dicebear.com/6.x/personas/svg?seed=Mike", lastMessage: "Did you see the game last night?", time: "Yesterday" },
+                { id: 3, name: "Emily Davis", avatar: "https://api.dicebear.com/6.x/personas/svg?seed=Emily", lastMessage: "Thanks for your help!", time: "2 days ago" },
+                { id: 4, name: "Chris Wilson", avatar: "https://api.dicebear.com/6.x/personas/svg?seed=Chris", lastMessage: "Let's catch up soon", time: "1 week ago" }
+            ];
+
+            const messages = {
+                1: [
+                    { sent: false, content: "Hey Alex! How's it going?", time: "10:30 AM" },
+                    { sent: true, content: "Hi Sarah! I'm doing well, thanks. How about you?", time: "10:32 AM" },
+                    { sent: false, content: "I'm great! Just wanted to check if we're still on for coffee tomorrow?", time: "10:35 AM" },
+                    { sent: true, content: "Absolutely! Looking forward to it. Same place at 2 PM?", time: "10:37 AM" },
+                    { sent: false, content: "Perfect! See you then!", time: "10:38 AM" }
+                ],
+                2: [
+                    { sent: false, content: "Did you see the game last night?", time: "Yesterday 9:15 PM" },
+                    { sent: true, content: "Yeah, it was incredible! That last-minute goal had me on the edge of my seat!", time: "Yesterday 9:20 PM" },
+                    { sent: false, content: "I know right? I couldn't believe it when it went in!", time: "Yesterday 9:22 PM" },
+                    { sent: true, content: "We should definitely catch the next game together. Maybe grab some wings?", time: "Yesterday 9:25 PM" },
+                    { sent: false, content: "Sounds like a plan! I'll check the schedule and get back to you.", time: "Yesterday 9:30 PM" }
+                ],
+                3: [
+                    { sent: false, content: "Hey Alex, I just wanted to say thanks again for your help with that coding problem. You're a lifesaver!", time: "2 days ago 3:45 PM" },
+                    { sent: true, content: "No problem at all, Emily! I'm always happy to help. How's the project coming along?", time: "2 days ago 4:00 PM" },
+                    { sent: false, content: "It's going great now, thanks to you. I think I'll be able to finish it ahead of schedule.", time: "2 days ago 4:05 PM" },
+                    { sent: true, content: "That's awesome! Let me know if you need any more help or just want to bounce ideas around.", time: "2 days ago 4:10 PM" },
+                    { sent: false, content: "Will do! Thanks again, you're the best!", time: "2 days ago 4:12 PM" }
+                ],
+                4: [
+                    { sent: true, content: "Hey Chris! It's been a while. How have you been?", time: "1 week ago 11:30 AM" },
+                    { sent: false, content: "Alex! Good to hear from you. I've been doing well, just busy with work. How about you?", time: "1 week ago 12:45 PM" },
+                    { sent: true, content: "Same here, work's been crazy. We should catch up soon though!", time: "1 week ago 1:00 PM" },
+                    { sent: false, content: "Definitely! Let's plan something for next weekend. I'll check my schedule and get back to you.", time: "1 week ago 1:15 PM" },
+                    { sent: true, content: "Sounds good! Looking forward to it.", time: "1 week ago 1:20 PM" }
+                ]
+            };
+
+            let currentConversation = null;
+
+            function renderConversations() {
+                $('#conversations-list').empty();
+                conversations.forEach(conv => {
+                    const convHtml = `
+                        <div class="conversation-item" data-id="${conv.id}">
+                            <img src="${conv.avatar}" alt="${conv.name} avatar" class="conversation-avatar">
+                            <div class="conversation-info">
+                                <div class="conversation-name">${conv.name}</div>
+                                <div class="conversation-preview">${conv.lastMessage}</div>
+                            </div>
+                        </div>
+                    `;
+                    $('#conversations-list').append(convHtml);
+                });
+            }
+
+            function renderMessages(conversationId) {
+                $('#chat-messages').empty();
+                messages[conversationId].forEach(msg => {
+                    const msgHtml = `
+                        <div class="message ${msg.sent ? 'sent' : 'received'}">
+                            ${msg.content}
+                        </div>
+                    `;
+                    $('#chat-messages').append(msgHtml);
+                });
+                $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+            }
+
+            function setActiveConversation(conversationId) {
+                currentConversation = conversationId;
+                $('.conversation-item').removeClass('active');
+                $(`.conversation-item[data-id="${conversationId}"]`).addClass('active');
+                const conversation = conversations.find(c => c.id === conversationId);
+                $('#chat-header-avatar').attr('src', conversation.avatar);
+                $('#chat-header-name').text(conversation.name);
+                renderMessages(conversationId);
+            }
+
+            renderConversations();
+            setActiveConversation(1); // Set the first conversation as active by default
+
+            $(document).on('click', '.conversation-item', function() {
+                const conversationId = $(this).data('id');
+                setActiveConversation(conversationId);
+            });
+
+            $('#send-button').click(function() {
+                const messageContent = $('#message-input').val().trim();
+                if (messageContent && currentConversation) {
+                    const newMessage = {
+                        sent: true,
+                        content: messageContent,
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    };
+                    messages[currentConversation].push(newMessage);
+                    renderMessages(currentConversation);
+                    $('#message-input').val('');
+                }
+            });
+
+            $('#message-input').keypress(function(e) {
+                if (e.which === 13) { // Enter key
+                    $('#send-button').click();
+                }
+            });
+        });
+    </script>
+</body></html>

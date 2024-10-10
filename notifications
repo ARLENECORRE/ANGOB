@@ -1,0 +1,348 @@
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialSphere - Notifications</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #f0f2f5;
+        color: #1c1e21;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    header {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1877f2;
+        text-decoration: none;
+    }
+    .nav-links a {
+        color: #65676b;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+        color: #1877f2;
+    }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #1c1e21;
+    }
+    .notifications {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .notification {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #e4e6eb;
+        transition: background-color 0.3s ease;
+    }
+    .notification:last-child {
+        border-bottom: none;
+    }
+    .notification:hover {
+        background-color: #f0f2f5;
+    }
+    .notification-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+    .notification-content {
+        flex-grow: 1;
+    }
+    .notification-text {
+        margin-bottom: 5px;
+    }
+    .notification-time {
+        font-size: 12px;
+        color: #65676b;
+    }
+    .notification-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+    }
+    .notification-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+    .like-icon {
+        background-color: #e7f3ff;
+    }
+    .like-icon svg {
+        fill: #1877f2;
+    }
+    .comment-icon {
+        background-color: #e7f3ff;
+    }
+    .comment-icon svg {
+        fill: #1877f2;
+    }
+    .friend-icon {
+        background-color: #e7f3ff;
+    }
+    .friend-icon svg {
+        fill: #1877f2;
+    }
+    .birthday-icon {
+        background-color: #ffebe5;
+    }
+    .birthday-icon svg {
+        fill: #f02849;
+    }
+    .notification.unread {
+        background-color: #e7f3ff;
+    }
+    .notification.unread:hover {
+        background-color: #dbebfe;
+    }
+    .notification-actions {
+        display: flex;
+        margin-top: 5px;
+    }
+    .notification-action {
+        background-color: #e4e6eb;
+        color: #050505;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.3s ease;
+    }
+    .notification-action:hover {
+        background-color: #d8dadf;
+    }
+    .notification-action.primary {
+        background-color: #1877f2;
+        color: #ffffff;
+    }
+    .notification-action.primary:hover {
+        background-color: #166fe5;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/home" class="logo">SocialSphere</a>
+            <div class="nav-links">
+                <a href="/home.html
+                <a href="/home/profile.html
+                <a href="/home/messages.html
+                <a href="/home/notifications.html
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1>Notifications</h1>
+        <div class="notifications" id="notifications-container">
+            <!-- Notifications will be dynamically added here -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const notifications = [
+                {
+                    type: 'like',
+                    user: 'jhermae',
+                    avatar: 'jhermae.jpg',
+                    content: 'liked your post',
+                    time: '2 minutes ago',
+                    unread: true
+                },
+                {
+                    type: 'comment',
+                    user: 'sahara',
+                    avatar: 'sahara.jpg',
+                    content: 'commented on your photo',
+                    time: '15 minutes ago',
+                    unread: true
+                },
+                {
+                    type: 'friend',
+                    user: 'rot nga gwapa',
+                    avatar: 'richelyn.jpg',
+                    content: 'accepted your friend request',
+                    time: '1 hour ago',
+                    unread: false
+                },
+                {
+                    type: 'birthday',
+                    user: 'sarada',
+                    avatar: '1.jpg',
+                    content: 'is celebrating a birthday today',
+                    time: 'Today',
+                    unread: false
+                },
+                {
+                    type: 'like',
+                    user: 'bigatla',
+                    avatar: 'arlene.jpg',
+                    content: 'liked your comment',
+                    time: 'Yesterday',
+                    unread: false
+                }
+            ];
+
+            function getNotificationIcon(type) {
+                switch(type) {
+                    case 'like':
+                        return `<div class="notification-icon like-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>`;
+                    case 'comment':
+                        return `<div class="notification-icon comment-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"/>
+                            </svg>
+                        </div>`;
+                    case 'friend':
+                        return `<div class="notification-icon friend-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <line x1="20" y1="8" x2="20" y2="14"></line>
+                                <line x1="23" y1="11" x2="17" y2="11"></line>
+                            </svg>
+                        </div>`;
+                    case 'birthday':
+                        return `<div class="notification-icon birthday-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>`;
+                    default:
+                        return '';
+                }
+            }
+
+            function renderNotifications() {
+                const container = $('#notifications-container');
+                container.empty();
+                
+                notifications.forEach((notification, index) => {
+                    const notificationHtml = `
+                        <div class="notification ${notification.unread ? 'unread' : ''}">
+                            ${getNotificationIcon(notification.type)}
+                            <img src="arlene.jpg" alt="${notification.user} avatar" class="notification-avatar">
+                            <div class="notification-content">
+                                <div class="notification-text"><strong>${notification.user}</strong> ${notification.content}</div>
+                                <div class="notification-time">${notification.time}</div>
+                                ${notification.type === 'friend' ? `
+                                    <div class="notification-actions">
+                                        <button class="notification-action primary view-profile" data-index="${index}">View Profile</button>
+                                        <button class="notification-action message" data-index="${index}">Message</button>
+                                    </div>
+                                ` : ''}
+                                ${notification.type === 'birthday' ? `
+                                    <div class="notification-actions">
+                                        <button class="notification-action primary wish-birthday" data-index="${index}">Wish Happy Birthday</button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    container.append(notificationHtml);
+                });
+            }
+
+            renderNotifications();
+
+            // Make notifications clickable to mark as read
+            $(document).on('click', '.notification', function() {
+                const index = $(this).index();
+                notifications[index].unread = false;
+                renderNotifications();
+            });
+
+            // View Profile button
+            $(document).on('click', '.view-profile', function(e) {
+                e.stopPropagation();
+                const index = $(this).data('index');
+                alert(`Viewing profile of ${notifications[index].user}`);
+            });
+
+            // Message button
+            $(document).on('click', '.message', function(e) {
+                e.stopPropagation();
+                const index = $(this).data('index');
+                alert(`Opening message window for ${notifications[index].user}`);
+            });
+
+            // Wish Happy Birthday button
+            $(document).on('click', '.wish-birthday', function(e) {
+                e.stopPropagation();
+                const index = $(this).data('index');
+                alert(`Sending birthday wishes to ${notifications[index].user}`);
+            });
+
+            // Make navigation links functional
+            $('.nav-links a').click(function(e) {
+                e.preventDefault();
+                const href = $(this).attr('href');
+                alert(`Navigating to ${href}. This feature is not fully implemented in this demo.`);
+            });
+
+            // Simulating new notifications
+            setInterval(() => {
+                const newTypes = ['like', 'comment', 'friend'];
+                const newUsers = ['Alex Johnson', 'Emma Wilson', 'Daniel Lee'];
+                const randomType = newTypes[Math.floor(Math.random() * newTypes.length)];
+                const randomUser = newUsers[Math.floor(Math.random() * newUsers.length)];
+                
+                const newNotification = {
+                    type: randomType,
+                    user: meriel,
+                    avatar: `1.jpg' ', '')}`,
+                    content: randomType === 'like' ? 'liked your post' : randomType === 'comment' ? 'commented on your photo' : 'sent you a friend request',
+                    time: 'Just now',
+                    unread: true
+                };
+
+                notifications.unshift(newNotification);
+                if (notifications.length > 10) {
+                    notifications.pop();
+                }
+                renderNotifications();
+            }, 30000); // Add a new notification every 30 seconds
+        });
+    </script>
+</body></html>
